@@ -18,17 +18,16 @@ class CreateRatingsTable extends Migration
             $table->timestamps();
             
             $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
-                
+            // $table->foreign('user_id')
+            //     ->references('id')->on('users')
+            //     ->onDelete('cascade');
             $table->unsignedBigInteger('restaurant_id')->unsigned();
-            $table->foreign('restaurant_id')
-                ->references('id')->on('restaurants')
-                ->onDelete('cascade');
-            
-            $table->enum('rating', array(1,2,3,4,5));
-            $table->string('comment');
+            // 
+            // $table->foreign('restaurant_id')
+            //     ->references('id')->on('restaurants')
+            //     ->onDelete('cascade');
+            $table->enum('rating', array(1,2,3,4,5))->nullable();
+            $table->string('comment')->nullable();
         });
     }
 

@@ -1,7 +1,12 @@
 <?php
 
-use App\Models\Restaurant;
+use Inertia\Inertia;
+use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+        'restaurants'=> RestaurantController::index(),
+        'ratings'=> RatingController::ratingsWithRestaurants(),
+    ]);
+})->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
 
-Route::get('/{any?}', function(){
-    return view('welcome');
-    })->where('any', '^(?!api\/)[\/\w\.-]*');
