@@ -1,8 +1,6 @@
 <template>
   <div>
     <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-
-
       <inertia-link
         v-if="$page.props.user"
         href="/dashboard"
@@ -308,12 +306,33 @@ export default {
   },
   methods: {
     updateRestaurantRating(data) {
-      this.$inertia.post("/api/updateRating", data,{preserveScroll: (page) => Object.keys(page.props.errors).length,});
+      this.$inertia.post("/api/updateRating", data, {
+        replace: true,
+        preserveState: true,
+        preserveScroll: true,
+      });
     },
     addNewRestaurant() {
-      this.$inertia.post("/api/addRestaurant", this.newRestaurant).then(() => {
-        this.newRestaurant = { name: "", description: "", image_link: "" };
-      });
+      this.$inertia
+        .post("/api/addRestaurant", this.newRestaurant, {
+          replace: true,
+          preserveState: true,
+          preserveScroll: true,
+        })
+        .then(() => {
+          this.newRestaurant = { name: "", description: "", image_link: "" };
+        });
+    },
+    removeRestaurant() {
+      this.$inertia
+        .post("/api/addRestaurant", this.newRestaurant, {
+          replace: true,
+          preserveState: true,
+          preserveScroll: true,
+        })
+        .then((data) => {
+          this.newRestaurant = { name: "", description: "", image_link: "" };
+        });
     },
   },
   mounted() {
