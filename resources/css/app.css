@@ -1,8 +1,0 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-input {
-  border: 1px solid gray;
-  border-radius:20px;
-}
