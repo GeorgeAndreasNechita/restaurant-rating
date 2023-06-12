@@ -12,7 +12,7 @@ import StarRating from 'vue-star-rating'
             <ul class="list">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="restaurant in restaurants"
                     :key="restaurant.id">
-                    <img class="w-full"
+                    <img class="w-2/3 m-auto mt-8"
                         src="https://sausalitos-bucket.s3.eu-central-1.amazonaws.com/Standorte_Saarbruecken_Slider_Web_740x800_0fedb53fa3.jpg"
                         alt="Sunset in the mountains">
                     <div class="px-6 py-4">
@@ -23,7 +23,11 @@ import StarRating from 'vue-star-rating'
                     </div>
                     <div class="px-6 pt-4 pb-2">
                     </div>
-                    <div class="star-parent-div"><star-rating :rating="restaurant.rating" /></div>
+                    <div class="star-parent-div"><star-rating :rating="restaurant.rating" :read-only="true" /></div>
+                    <button
+                        class="bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-8 mx-16">
+                        Delete from database
+                    </button>
                 </div>
             </ul>
         </div>
@@ -68,7 +72,8 @@ export default {
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0 30px;
 }
-.star-parent-div{
+
+.star-parent-div {
     display: grid;
     justify-content: center;
     margin-bottom: 30px;
