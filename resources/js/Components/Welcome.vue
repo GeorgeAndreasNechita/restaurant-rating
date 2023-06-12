@@ -8,8 +8,8 @@ import StarRating from 'vue-star-rating'
         <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
             Restaurants in Stuttgart
         </div>
-        <div class="actions">
-            <ul>
+        <div>
+            <ul class="list">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="restaurant in restaurants"
                     :key="restaurant.id">
                     <img class="w-full"
@@ -23,7 +23,7 @@ import StarRating from 'vue-star-rating'
                     </div>
                     <div class="px-6 pt-4 pb-2">
                     </div>
-                    <star-rating />
+                    <div class="star-parent-div"><star-rating :rating="restaurant.rating" /></div>
                 </div>
             </ul>
         </div>
@@ -62,8 +62,15 @@ export default {
 </script>
 
 <style scoped>
-.actions {
+.list {
     display: grid;
+    grid-gap: 30px;
     grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 30px;
+}
+.star-parent-div{
+    display: grid;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 </style>

@@ -38,7 +38,7 @@ class RestaurantSeeder extends Seeder
                 'address' => '789 Oak Ave',
                 'description' => 'State 3',
                 'picture_url' => 'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/2c/51/italiano-restaurant-copenhagen.jpg',
-                'rating' => 4.8,
+                'rating' => 1.8,
             ],
             [
                 'name' => 'Pasta Palace',
@@ -46,7 +46,7 @@ class RestaurantSeeder extends Seeder
                 'address' => '321 Pine St',
                 'description' => 'State 4',
                 'picture_url' => 'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/2c/51/italiano-restaurant-copenhagen.jpg',
-                'rating' => 4.0,
+                'rating' => 2.0,
             ],
             [
                 'name' => 'Burger Bistro',
@@ -78,7 +78,7 @@ class RestaurantSeeder extends Seeder
                 'address' => '876 Elm St',
                 'description' => 'State 8',
                 'picture_url' => 'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/2c/51/italiano-restaurant-copenhagen.jpg',
-                'rating' => 4.6,
+                'rating' => 3.6,
             ],
             [
                 'name' => 'Pizza Paradise',
@@ -86,7 +86,7 @@ class RestaurantSeeder extends Seeder
                 'address' => '210 Oak Ave',
                 'description' => 'State 9',
                 'picture_url' => 'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/2c/51/italiano-restaurant-copenhagen.jpg',
-                'rating' => 4.1,
+                'rating' => 2.1,
             ],
         ];
 
