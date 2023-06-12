@@ -12,4 +12,11 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::all();
         return response()->json($restaurants);
     }
+    public function destroy($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+        $restaurant->delete();
+
+        return response()->json(['message' => 'Restaurant deleted successfully']);
+    }
 }

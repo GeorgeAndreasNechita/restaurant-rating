@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/restaurants', [RestaurantController::class, 'index']);
+Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
