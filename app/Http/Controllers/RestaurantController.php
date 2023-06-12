@@ -19,4 +19,10 @@ class RestaurantController extends Controller
 
         return response()->json(['message' => 'Restaurant deleted successfully']);
     }
+    public function store(Request $request)
+    {
+        $restaurant = Restaurant::create($request->all());
+
+        return response()->json(['message' => 'Restaurant created successfully', 'data' => $restaurant]);
+    }
 }

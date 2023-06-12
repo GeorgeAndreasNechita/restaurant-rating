@@ -8,13 +8,20 @@ import StarRating from 'vue-star-rating'
         <h1 class="p-6 lg:p-8 bg-white border-b border-gray-200">
             Restaurants around the world
         </h1>
-<div class="text-center mt-8">
+        <div class="text-center mt-8">
             <button @click="toggleAddMenu"
                 class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 Add your own restaurant
             </button>
-</div>
+        </div>
         <div v-if="showAddMenu">
+            <input type="text" v-model="name" placeholder="Name">
+            <input type="text" v-model="city" placeholder="City">
+            <input type="text" v-model="address" placeholder="Address">
+            <textarea v-model="description" placeholder="Description"></textarea>
+            <input type="text" v-model="picture_url" placeholder="Picture URL">
+            <input type="number" v-model="rating" placeholder="Rating">
+            <button type="submit" @click="createRestaurant()">Create Restaurant</button>
         </div>
         <div>
             <ul class="list">
@@ -51,7 +58,13 @@ export default {
     data() {
         return {
             restaurants: [],
-            showAddMenu: false
+            showAddMenu: false,
+            name: '',
+            city: '',
+            address: '',
+            description: '',
+            picture_url: '',
+            rating: null
         };
     },
     mounted() {
@@ -80,6 +93,27 @@ export default {
         },
         toggleAddMenu() {
             this.showAddMenu = !this.showAddMenu
+        },
+        createRestaurant() {
+            const restaurantData = {
+                name: this.name,
+                city: this.city,
+                address: this.address,
+                description: this.description,
+                picture_url: this.picture_url,
+                rating: this.rating
+            };
+
+            axios.post('/api/addRestaurant', restaurantData)
+                .then(response => {
+                    console.log(response.data); // Handle the success response
+                    this.fetchRestaurants();
+                    this.name, this.city, this.address, this.description, this.picture_url, this.rating = '',
+                    this.showAddMenu = false;
+                })
+                .catch(error => {
+                    console.error(error); // Handle the error response
+                });
         }
     },
 };
