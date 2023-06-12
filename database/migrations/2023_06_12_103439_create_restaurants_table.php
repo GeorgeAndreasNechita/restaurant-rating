@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('description', 1000);
             $table->string('picture_url');
+            $table->tinyInteger('rating')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import StarRating from 'vue-star-rating'
 </script>
 
 <template>
@@ -17,12 +18,12 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">{{ restaurant.name }} - {{ restaurant.city }}</div>
                         <p class="text-gray-700 text-base">
-                            {{restaurant.description}}
+                            {{ restaurant.description }}
                         </p>
                     </div>
                     <div class="px-6 pt-4 pb-2">
-
                     </div>
+                    <star-rating />
                 </div>
             </ul>
         </div>
@@ -34,6 +35,9 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import axios from 'axios';
 
 export default {
+    components: {
+        StarRating
+    },
     data() {
         return {
             restaurants: [],
