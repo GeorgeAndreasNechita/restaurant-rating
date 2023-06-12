@@ -14,15 +14,24 @@ import StarRating from 'vue-star-rating'
                 Add your own restaurant
             </button>
         </div>
-        <div v-if="showAddMenu">
-            <input type="text" v-model="name" placeholder="Name">
-            <input type="text" v-model="city" placeholder="City">
-            <input type="text" v-model="address" placeholder="Address">
-            <textarea v-model="description" placeholder="Description"></textarea>
-            <input type="text" v-model="picture_url" placeholder="Picture URL">
-            <input type="number" v-model="rating" placeholder="Rating">
-            <button type="submit" @click="createRestaurant()">Create Restaurant</button>
+        <div v-if="showAddMenu" class="grid grid-cols-2 gap-4 mx-6 my-6 bg-gray-200 border border-gray-300 rounded-lg p-4 shadow-md inline-block">
+            <input type="text" v-model="name" placeholder="Name"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" v-model="city" placeholder="City"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" v-model="address" placeholder="Address"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea v-model="description" placeholder="Description"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 col-span-2"></textarea>
+            <input type="text" v-model="picture_url" placeholder="Picture URL"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" v-model="rating" placeholder="Rating"
+                class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" @click="createRestaurant()"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded col-span-2">Create
+                Restaurant</button>
         </div>
+
         <div>
             <ul class="list">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="restaurant in restaurants"
@@ -109,7 +118,7 @@ export default {
                     console.log(response.data); // Handle the success response
                     this.fetchRestaurants();
                     this.name, this.city, this.address, this.description, this.picture_url, this.rating = '',
-                    this.showAddMenu = false;
+                        this.showAddMenu = false;
                 })
                 .catch(error => {
                     console.error(error); // Handle the error response
@@ -131,5 +140,4 @@ export default {
     display: grid;
     justify-content: center;
     margin-bottom: 30px;
-}
-</style>
+}</style>
