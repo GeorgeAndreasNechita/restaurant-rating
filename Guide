@@ -1,0 +1,7 @@
+Email verification:
+1.Register
+2.Verification email(must be activated in fortify and user model)
+3. Mailtrap
+4. Database data
+5. Email verified at after it's done
+2. Vue Devtools
