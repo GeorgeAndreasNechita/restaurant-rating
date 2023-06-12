@@ -14,7 +14,8 @@ import StarRating from 'vue-star-rating'
                 Add your own restaurant <span v-if="showAddMenu"> - Hide</span><span v-if="!showAddMenu"> - Show</span>
             </button>
         </div>
-        <div v-if="showAddMenu" class="grid grid-cols-2 gap-4 mx-6 my-6 bg-gray-200 border border-gray-300 rounded-lg p-4 shadow-md inline-block">
+        <div v-if="showAddMenu"
+            class="grid grid-cols-2 gap-4 mx-6 my-6 bg-gray-200 border border-gray-300 rounded-lg p-4 shadow-md inline-block">
             <input type="text" v-model="name" placeholder="Name"
                 class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             <input type="text" v-model="city" placeholder="City"
@@ -46,10 +47,16 @@ import StarRating from 'vue-star-rating'
                     <div class="px-6 pt-4 pb-2">
                     </div>
                     <div class="star-parent-div"><star-rating :rating="restaurant.rating" :read-only="true" /></div>
-                    <button @click="deleteRestaurant(restaurant.id)"
-                        class="bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-8 mx-16">
-                        Delete from database
-                    </button>
+                    <div class="grid grid-cols-2 gap-4 mx-8">
+                        <button @click="editRestaurant(restaurant)"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-8">
+                            Edit
+                        </button>
+                        <button @click="deleteRestaurant(restaurant.id)"
+                            class="bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-8">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </ul>
         </div>
@@ -140,4 +147,5 @@ export default {
     display: grid;
     justify-content: center;
     margin-bottom: 30px;
-}</style>
+}
+</style>
