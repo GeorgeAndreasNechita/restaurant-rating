@@ -11,7 +11,7 @@ import StarRating from 'vue-star-rating'
         <div class="text-center mt-8">
             <button @click="toggleAddMenu"
                 class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                Add your own restaurant
+                Add your own restaurant <span v-if="showAddMenu"> - Hide</span><span v-if="!showAddMenu"> - Show</span>
             </button>
         </div>
         <div v-if="showAddMenu" class="grid grid-cols-2 gap-4 mx-6 my-6 bg-gray-200 border border-gray-300 rounded-lg p-4 shadow-md inline-block">
