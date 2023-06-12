@@ -5,11 +5,18 @@ import StarRating from 'vue-star-rating'
 
 <template>
     <div>
-        <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-            Restaurants in Stuttgart
+        <h1 class="p-6 lg:p-8 bg-white border-b border-gray-200">
+            Restaurants around the world
+        </h1>
+<div class="text-center mt-8">
+            <button @click="toggleAddMenu"
+                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                Add your own restaurant
+            </button>
+</div>
+        <div v-if="showAddMenu">
         </div>
         <div>
-            
             <ul class="list">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="restaurant in restaurants"
                     :key="restaurant.id">
@@ -44,6 +51,7 @@ export default {
     data() {
         return {
             restaurants: [],
+            showAddMenu: false
         };
     },
     mounted() {
@@ -69,6 +77,9 @@ export default {
                     console.error(error); // Handle the error response
                 });
             this.fetchRestaurants();
+        },
+        toggleAddMenu() {
+            this.showAddMenu = !this.showAddMenu
         }
     },
 };
