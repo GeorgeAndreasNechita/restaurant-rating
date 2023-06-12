@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('city');
+            $table->string('address');
             $table->string('description', 1000);
             $table->string('picture_url');
             $table->tinyInteger('rating')->unsigned()->nullable();
