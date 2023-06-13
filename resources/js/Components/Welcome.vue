@@ -62,13 +62,13 @@ import StarRating from 'vue-star-rating'
                 </div>
             </ul>
         </div>
-        <div class="modal-vue">
+        <div class="modal-div">
                 <!-- overlay -->
-                <div class="overlay" v-if="showEditingModal" @click="showEditingModal = false"></div>
+                <div class="modal-div__overlay" v-if="showEditingModal" @click="showEditingModal = false"></div>
 
                 <!-- modal -->
-                <div class="modal" v-if="showEditingModal">
-                    <button class="close" @click="showEditingModal = false">x</button>
+                <div class="modal-div__modal" v-if="showEditingModal">
+                    <button class="modal-div__close" @click="showEditingModal = false">x</button>
                     <h3>Title</h3>
                     <p>Description</p>
                 </div>
@@ -168,7 +168,20 @@ export default {
 }
 
 /* Modal */
-.modal-vue .overlay {
+.modal-div{
+    display: grid;
+    justify-items: center;
+}
+.modal-div__modal {
+    position: fixed;
+    top: 20%;
+    width: 300px;
+    z-index: 9999;
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: #fff;
+}
+.modal-div__overlay {
     position: fixed;
     z-index: 9998;
     top: 0;
@@ -178,16 +191,7 @@ export default {
     background-color: rgba(0, 0, 0, .5);
 }
 
-.modal-vue .modal {
-    position: relative;
-    width: 300px;
-    z-index: 9999;
-    margin: 0 auto;
-    padding: 20px 30px;
-    background-color: #fff;
-}
-
-.modal-vue .close {
+.modal-div__close {
     position: absolute;
     top: 10px;
     right: 10px;
