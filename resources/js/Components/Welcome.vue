@@ -67,24 +67,43 @@ import StarRating from 'vue-star-rating'
 
             <!-- modal -->
             <div class="modal-div__modal" v-if="showEditingModal">
-                <button class="modal-div__close" @click="showEditingModal = false">x</button>
-
-                <h3>Edit Restaurant</h3>
-                <label for="editName">Name:</label>
-                <input type="text" id="editName" v-model="editingRestaurantData.name">
-                <label for="editCity">City:</label>
-                <input type="text" id="editCity" v-model="editingRestaurantData.city">
-                <label for="editAddress">Address:</label>
-                <input type="text" id="editAddress" v-model="editingRestaurantData.address">
-                <label for="editDescription">Description:</label>
-                <textarea id="editDescription" v-model="editingRestaurantData.description"></textarea>
-                <label for="editPictureUrl">Picture URL:</label>
-                <input type="text" id="editPictureUrl" v-model="editingRestaurantData.picture_url">
-                <label for="editRating">Rating:</label>
-                <input type="number" id="editRating" v-model="editingRestaurantData.rating">
-                <button @click="updateRestaurant"
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
+                <button class="modal-div__close text-gray-500 hover:text-gray-800"
+                    @click="showEditingModal = false">x</button>
+                <h3 class="text-lg font-semibold mb-4">Edit Restaurant</h3>
+                <div class="mb-4">
+                    <label for="editName" class="block text-gray-700 font-medium mb-1">Name:</label>
+                    <input type="text" id="editName" v-model="editingRestaurantData.name"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="editCity" class="block text-gray-700 font-medium mb-1">City:</label>
+                    <input type="text" id="editCity" v-model="editingRestaurantData.city"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="editAddress" class="block text-gray-700 font-medium mb-1">Address:</label>
+                    <input type="text" id="editAddress" v-model="editingRestaurantData.address"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="editDescription" class="block text-gray-700 font-medium mb-1">Description:</label>
+                    <textarea id="editDescription" v-model="editingRestaurantData.description"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="editPictureUrl" class="block text-gray-700 font-medium mb-1">Picture URL:</label>
+                    <input type="text" id="editPictureUrl" v-model="editingRestaurantData.picture_url"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="editRating" class="block text-gray-700 font-medium mb-1">Rating:</label>
+                    <input type="number" id="editRating" v-model="editingRestaurantData.rating"
+                        class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button @click="cancelUpdateRestaurant" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                <button @click="updateRestaurant" class="ml-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
             </div>
+
 
         </div>
     </div>
@@ -200,8 +219,8 @@ export default {
 
 .modal-div__modal {
     position: fixed;
-    top: 20%;
-    width: 300px;
+    top: 10%;
+    width: 80%;
     z-index: 9999;
     margin: 0 auto;
     padding: 20px 30px;
