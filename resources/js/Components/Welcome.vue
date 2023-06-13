@@ -49,7 +49,7 @@ import StarRating from 'vue-star-rating'
                     </div>
                     <div class="star-parent-div"><star-rating :rating="restaurant.rating" :read-only="true" /></div>
                     <div class="grid grid-cols-2 gap-4 mx-8">
-                        <button @click="editRestaurant(restaurant)" v-if="!editingRestaurant"
+                        <button @click="editRestaurant(restaurant)"
                             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mb-8">
                             Edit
                         </button>
@@ -130,7 +130,6 @@ export default {
 
             editingRestaurantData: {},
 
-            editingRestaurant: false,
             showEditingModal: false
         };
     },
@@ -192,6 +191,10 @@ export default {
                 .catch(error => {
                     console.error(error); // Handle the error response
                 });
+        },
+        cancelUpdateRestaurant(){
+            this.editingRestaurantData = {};
+            this.showEditingModal = false;
         }
     },
 };
