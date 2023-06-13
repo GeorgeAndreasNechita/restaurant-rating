@@ -18,7 +18,11 @@ use App\Http\Controllers\RestaurantController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/restaurants', [RestaurantController::class, 'index']);
-Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
+// Create
 Route::post('/addRestaurant', [RestaurantController::class, 'store']);
+// Read
+Route::get('/restaurants', [RestaurantController::class, 'index']);
+// Update
+Route::put('/restaurants/{restaurant}', [RestaurantController::class, 'update']);
+// Delete
+Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);

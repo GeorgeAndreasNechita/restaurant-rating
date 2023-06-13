@@ -100,8 +100,10 @@ import StarRating from 'vue-star-rating'
                     <input type="number" id="editRating" v-model="editingRestaurantData.rating"
                         class="w-full border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <button @click="cancelUpdateRestaurant" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Cancel</button>
-                <button @click="updateRestaurant" class="ml-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
+                <button @click="cancelUpdateRestaurant"
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                <button @click="updateRestaurant"
+                    class="ml-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
             </div>
 
 
@@ -137,6 +139,7 @@ export default {
         this.fetchRestaurants();
     },
     methods: {
+        // Read
         fetchRestaurants() {
             axios
                 .get('/api/restaurants')
@@ -147,17 +150,7 @@ export default {
                     console.error(error);
                 });
         },
-        editRestaurant(restaurant) {
-            this.showEditingModal = true;
-            this.editingRestaurantData = {
-                name: restaurant.name,
-                city: restaurant.city,
-                address: restaurant.address,
-                description: restaurant.description,
-                picture_url: restaurant.picture_url,
-                rating: restaurant.rating,
-            }
-        },
+        // Delete
         deleteRestaurant(restaurantId) {
             axios.delete(`/api/restaurants/${restaurantId}`)
                 .then(response => {
@@ -171,6 +164,7 @@ export default {
         toggleAddMenu() {
             this.showAddMenu = !this.showAddMenu
         },
+        // Create
         createRestaurant() {
             const restaurantData = {
                 name: this.name,
@@ -186,15 +180,39 @@ export default {
                     console.log(response.data); // Handle the success response
                     this.fetchRestaurants();
                     this.name, this.city, this.address, this.description, this.picture_url, this.rating = '',
-                        this.showAddMenu = false;
+                    this.showAddMenu = false;
                 })
                 .catch(error => {
                     console.error(error); // Handle the error response
                 });
         },
-        cancelUpdateRestaurant(){
+        // Update
+        editRestaurant(restaurant) {
+            this.showEditingModal = true;
+            this.editingRestaurantData = {
+                id: restaurant.id,
+                name: restaurant.name,
+                city: restaurant.city,
+                address: restaurant.address,
+                description: restaurant.description,
+                picture_url: restaurant.picture_url,
+                rating: restaurant.rating,
+            }
+        },
+        cancelUpdateRestaurant() {
             this.editingRestaurantData = {};
             this.showEditingModal = false;
+        },
+        updateRestaurant() {
+            axios.put(`/api/restaurants/${this.editingRestaurantData.id}`, this.editingRestaurantData)
+                .then(response => {
+                    console.log(response.data);
+                    this.showEditingModal = false;
+                    this.fetchRestaurants();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     },
 };
