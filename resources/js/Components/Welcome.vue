@@ -36,7 +36,6 @@ import StarRating from 'vue-star-rating'
         <div>
 
             <ul class="list">
-
                 <div class="max-w-sm rounded overflow-hidden shadow-lg" v-for="restaurant in restaurants"
                     :key="restaurant.id">
                     <img class="w-2/3 m-auto mt-8" :src="restaurant.picture_url" alt="Sunset in the mountains">
@@ -63,17 +62,31 @@ import StarRating from 'vue-star-rating'
             </ul>
         </div>
         <div class="modal-div">
-                <!-- overlay -->
-                <div class="modal-div__overlay" v-if="showEditingModal" @click="showEditingModal = false"></div>
+            <!-- overlay -->
+            <div class="modal-div__overlay" v-if="showEditingModal" @click="showEditingModal = false"></div>
 
-                <!-- modal -->
-                <div class="modal-div__modal" v-if="showEditingModal">
-                    <button class="modal-div__close" @click="showEditingModal = false">x</button>
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
+            <!-- modal -->
+            <div class="modal-div__modal" v-if="showEditingModal">
+                <button class="modal-div__close" @click="showEditingModal = false">x</button>
 
+                <h3>Edit Restaurant</h3>
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" v-model="editingRestaurantData.name">
+                <label for="editCity">City:</label>
+                <input type="text" id="editCity" v-model="editingRestaurantData.city">
+                <label for="editAddress">Address:</label>
+                <input type="text" id="editAddress" v-model="editingRestaurantData.address">
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription" v-model="editingRestaurantData.description"></textarea>
+                <label for="editPictureUrl">Picture URL:</label>
+                <input type="text" id="editPictureUrl" v-model="editingRestaurantData.picture_url">
+                <label for="editRating">Rating:</label>
+                <input type="number" id="editRating" v-model="editingRestaurantData.rating">
+                <button @click="updateRestaurant"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
             </div>
+
+        </div>
     </div>
 </template>
 
@@ -88,12 +101,16 @@ export default {
         return {
             restaurants: [],
             showAddMenu: false,
+
             name: '',
             city: '',
             address: '',
             description: '',
             picture_url: '',
             rating: null,
+
+            editingRestaurantData: {},
+
             editingRestaurant: false,
             showEditingModal: false
         };
@@ -114,6 +131,14 @@ export default {
         },
         editRestaurant(restaurant) {
             this.showEditingModal = true;
+            this.editingRestaurantData = {
+                name: restaurant.name,
+                city: restaurant.city,
+                address: restaurant.address,
+                description: restaurant.description,
+                picture_url: restaurant.picture_url,
+                rating: restaurant.rating,
+            }
         },
         deleteRestaurant(restaurantId) {
             axios.delete(`/api/restaurants/${restaurantId}`)
@@ -168,10 +193,11 @@ export default {
 }
 
 /* Modal */
-.modal-div{
+.modal-div {
     display: grid;
     justify-items: center;
 }
+
 .modal-div__modal {
     position: fixed;
     top: 20%;
@@ -181,6 +207,7 @@ export default {
     padding: 20px 30px;
     background-color: #fff;
 }
+
 .modal-div__overlay {
     position: fixed;
     z-index: 9998;
