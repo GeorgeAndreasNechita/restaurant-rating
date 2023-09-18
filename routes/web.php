@@ -37,4 +37,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/genderGerman', function () {
+        return Inertia::render('GenderGerman');
+    })->name('genderGerman');
+    
 });
