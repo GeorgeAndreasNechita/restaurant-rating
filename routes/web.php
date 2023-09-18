@@ -30,7 +30,7 @@ Route::any('/restaurants', function () {
     return Restaurant::all();
 });
 Route::any('/german_words', function () {
-    return GermanWord::all();
+    return GermanWord::where('correct','<=', 10)->get()->shuffle();
 });
 
 Route::middleware([
