@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('german_word');
             $table->string('article'); // Der, Die, Das, Den, etc.
             $table->string('english_translation');
-            $table->unsignedInteger('correct')->default(0);
+            $table->tinyInteger('correct')->default(0);
             $table->timestamps();
         });
     }
@@ -33,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('german_words');
     }
 };
+
