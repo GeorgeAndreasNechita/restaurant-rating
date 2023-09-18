@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\GermanWord;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -28,6 +29,9 @@ Route::get('/', function () {
 Route::any('/restaurants', function () {
     return Restaurant::all();
 });
+Route::any('/german_words', function () {
+    return GermanWord::all();
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -41,5 +45,5 @@ Route::middleware([
     Route::get('/genderGerman', function () {
         return Inertia::render('GenderGerman');
     })->name('genderGerman');
-    
+
 });
