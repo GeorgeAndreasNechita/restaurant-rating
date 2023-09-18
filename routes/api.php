@@ -26,3 +26,6 @@ Route::get('/restaurants', [RestaurantController::class, 'index']);
 Route::put('/restaurants/{restaurant}', [RestaurantController::class, 'update']);
 // Delete
 Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
+
+// routes/api.php
+Route::post('/german-words/{id}', 'App\Http\Controllers\GermanWordController@updateCorrect');
