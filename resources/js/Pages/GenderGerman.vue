@@ -13,7 +13,8 @@ import axios from 'axios';
     </template>
 
 
-    <div v-if="words[0] && words[0].german_word" class="py-32"  :class="{ 'bg-green-400': isCorrect === true , 'bg-red-400': isCorrect === false }" >
+
+    <div v-if="words[0] && words[0].german_word" class="py-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false }" >
       <div class="text-green-700 text-4xl font-bold text-center">
         {{ words[0].german_word }} -
         <span class="text-blue-700 text-3xl font-bold text-center mt-2">
@@ -42,7 +43,7 @@ export default {
   data() {
     return {
       words: [],
-      isCorrect: ''
+      answerIsCorrect: ''
     }
   },
   
@@ -58,13 +59,17 @@ export default {
     },
     selectAnswer(answer) {
       if (answer == this.words[0].article) {
+        var mySound = new Audio('success.mp3')
+        mySound.play()
         this.words[0].correct += 1;
-        this.isCorrect = true;
+        this.answerIsCorrect = true;
 
       }
       else {
+        var mySound = new Audio('failure.mp3')
+        mySound.play()
         this.words[0].correct -= 1
-        this.isCorrect = false;
+        this.answerIsCorrect = false;
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
         .then(response => {
@@ -73,10 +78,11 @@ export default {
         .catch(error => {
           console.error('Error updating correct status:', error);
         });
+
         setTimeout(() => {
-          this.isCorrect = '';
+          this.answerIsCorrect = '';
           this.words.shift();
-        }, 2000);
+        }, 500);
     }
   }
 }
