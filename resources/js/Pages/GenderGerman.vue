@@ -31,7 +31,8 @@ import axios from 'axios';
            Wrong: {{ this.incorrectAnswers }}
         </span>
       </div> -->
-      <div class="mt-4 text-green-700 text-2xl font-bold text-center" >Points: {{ this.correctAnswers - this.incorrectAnswers }}</div>
+      <div class="mt-4 text-green-700 text-2xl font-bold text-center" >Points: {{ this.correctAnswers - this.incorrectAnswers }} &nbsp;&nbsp;&nbsp; <span class="text-center text-black" >Words left: {{ wordsCountInDatabase }}</span></div>
+      
       <div class="grid justify-center mt-2 font-bold text-2xl">
         <button @click="selectAnswer('Die')" class="answerButton text-orange-500">Die</button>
         <button @click="selectAnswer('Das')" class="answerButton text-violet-400">Das</button>
@@ -83,7 +84,8 @@ export default {
       selectedVoice: 0,
       synth: window.speechSynthesis,
       voiceList: [],
-      greetingSpeech: new window.SpeechSynthesisUtterance()
+      greetingSpeech: new window.SpeechSynthesisUtterance(),
+      wordsCountInDatabase: ''
     }
   },
   
@@ -91,7 +93,8 @@ export default {
     fetchGermanWords() {
       axios.get('/api/german_words') // Replace with your API endpoint
         .then(response => {
-          this.words = response.data;
+          this.words = response.data[0];
+          this.wordsCountInDatabase = response.data[1];
         })
         .catch(error => {
           console.error('Error fetching German words:', error);
