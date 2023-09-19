@@ -26,11 +26,11 @@ import axios from 'axios';
 
 
       <div class="mt-4 text-green-700 text-2xl font-bold text-center">
-        Right: {{ this.correctAnswers }} 
-      </div>
-        <div class="text-red-700 text-2xl font-bold text-center">
+        Right: {{ this.correctAnswers }}    
+        <span class="text-red-700 text-2xl font-bold text-center">
            Wrong: {{ this.incorrectAnswers }}
-        </div>
+        </span>
+      </div>
 
       <div class="grid justify-center mt-2 font-bold text-2xl">
         <button @click="selectAnswer('Die')" class="answerButton text-orange-500">Die</button>
