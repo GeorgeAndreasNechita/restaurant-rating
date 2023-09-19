@@ -15,17 +15,23 @@ import axios from 'axios';
 
 
     <div v-if="words[0] && words[0].german_word" class="py-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false }" >
-      <div class="text-green-700 text-4xl font-bold text-center">
+      <div class="text-4xl font-bold text-center">
         {{ words[0].german_word }} -
         <span class="text-blue-700 text-3xl font-bold text-center mt-2">
           {{ words[0].english_translation }}
         </span>
       </div>
+      <div class="mt-4 text-green-700 text-2xl font-bold text-center">
+        Right: {{ this.correctAnswers }} 
+      </div>
+        <div class="text-red-700 text-2xl font-bold text-center">
+           Wrong: {{ this.incorrectAnswers }}
+        </div>
 
-      <div class="grid justify-center mt-8 font-bold text-2xl">
-        <button @click="selectAnswer('Der')" class="my-2 bg-blue-400 text-white px-32 py-4 rounded-lg mx-16" >Der</button>
+      <div class="grid justify-center mt-2 font-bold text-2xl">
         <button @click="selectAnswer('Die')" class="my-2 bg-blue-500 text-white px-32 py-4 rounded-lg mx-16">Die</button>
         <button @click="selectAnswer('Das')" class="my-2 bg-blue-600 text-white px-32 py-4 rounded-lg mx-16">Das</button>
+        <button @click="selectAnswer('Der')" class="my-2 bg-blue-400 text-white px-32 py-4 rounded-lg mx-16" >Der</button>
       </div>
     </div>
   </AppLayout>
@@ -43,7 +49,9 @@ export default {
   data() {
     return {
       words: [],
-      answerIsCorrect: ''
+      answerIsCorrect: '',
+      correctAnswers: 0,
+      incorrectAnswers: 0,
     }
   },
   
@@ -63,6 +71,7 @@ export default {
         mySound.play()
         this.words[0].correct += 1;
         this.answerIsCorrect = true;
+        this.correctAnswers++;
 
       }
       else {
@@ -70,6 +79,7 @@ export default {
         mySound.play()
         this.words[0].correct -= 1
         this.answerIsCorrect = false;
+        this.incorrectAnswers++;
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
         .then(response => {
