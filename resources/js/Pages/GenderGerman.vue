@@ -37,7 +37,34 @@ import axios from 'axios';
         <button @click="selectAnswer('Das')" class="answerButton text-violet-400">Das</button>
         <button @click="selectAnswer('Der')" class="answerButton text-stone-400" >Der</button>
       </div>
-                    
+         <!-- https://github.com/tjFogarty/speech-synthesis -->
+<div>
+
+  <transition name="fade" v-if="!isLoading">
+    <div class="form-container">
+
+      <form @submit.prevent="greet">
+
+        <div class="form-group" v-if="voiceList.length">
+          <label for="voices">Select a voice</label>
+          <select class="form-control" id="voices" v-model="selectedVoice">
+            <option v-for="(voice, index) in voiceList" :data-lang="voice.lang" :value="index">
+              {{ voice.name }} ({{ voice.lang }})
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="your-name">Text to speak</label>
+          <input class="form-control" id="your-name" type="text" v-model="name" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Greet</button>
+      </form>
+
+    </div>
+  </transition>
+</div>           
     </div>
   </AppLayout>
 </template>
@@ -49,7 +76,25 @@ export default {
     
   },
   mounted(){
+    // wait for voices to load
+    // I can't get FF to work without calling this first
+    // Chrome works on the onvoiceschanged function
+    this.voiceList = this.synth.getVoices()
 
+    if (this.voiceList.length) {
+      this.isLoading = false
+    }
+
+    this.synth.onvoiceschanged = () => {
+      this.voiceList = this.synth.getVoices()
+      // give a bit of delay to show loading screen
+      // just for the sake of it, I suppose. Not the best reason
+      setTimeout(() => {
+        this.isLoading = false
+      }, 800)
+    }
+
+    this.listenForSpeechEvents()
   },
   data() {
     return {
@@ -58,6 +103,12 @@ export default {
       answerIsCorrect: '',
       correctAnswers: 0,
       incorrectAnswers: 0,
+            isLoading: true,
+      name: '',
+      selectedVoice: 0,
+      synth: window.speechSynthesis,
+      voiceList: [],
+      greetingSpeech: new window.SpeechSynthesisUtterance()
     }
   },
   
@@ -106,6 +157,30 @@ export default {
             this.fetchGermanWords();
           }
         }, 350);
+    },
+        /**
+     * React to speech events
+     */
+    listenForSpeechEvents () {
+      this.greetingSpeech.onstart = () => {
+        this.isLoading = true
+      }
+
+      this.greetingSpeech.onend = () => {
+        this.isLoading = false
+      }
+    },
+
+    /**
+     * Shout at the user
+     */
+    greet () {
+      // it should be 'craic', but it doesn't sound right
+      this.greetingSpeech.text = `${this.name}`
+
+      this.greetingSpeech.voice = this.voiceList[this.selectedVoice]
+      
+      this.synth.speak(this.greetingSpeech)
     }
   }
 }
