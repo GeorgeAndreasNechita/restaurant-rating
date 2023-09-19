@@ -12,7 +12,7 @@ import axios from 'axios';
       </h2>
     </template>
 
-      <div class="mt-12 text-3xl font-bold text-center" v-if="lastWord && lastWord.article">
+      <div class="mt-8 text-3xl font-bold text-center" :class="{ 'opacity-0': !lastWord.article }">
       Last (wrong): {{ lastWord.article }} {{ lastWord.german_word }}
       </div>
 
