@@ -37,33 +37,8 @@ import axios from 'axios';
         <button @click="selectAnswer('Das')" class="answerButton text-violet-400">Das</button>
         <button @click="selectAnswer('Der')" class="answerButton text-stone-400" >Der</button>
       </div>
-         <!-- https://github.com/tjFogarty/speech-synthesis -->
 <div>
 
-  <transition name="fade" v-if="!isLoading">
-    <div class="form-container">
-
-      <form @submit.prevent="greet">
-
-        <div class="form-group" v-if="voiceList.length">
-          <label for="voices">Select a voice</label>
-          <select class="form-control" id="voices" v-model="selectedVoice">
-            <option v-for="(voice, index) in voiceList" :data-lang="voice.lang" :value="index">
-              {{ voice.name }} ({{ voice.lang }})
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="your-name">Text to speak</label>
-          <input class="form-control" id="your-name" type="text" v-model="name" required>
-        </div>
-
-        <button type="submit" class="btn btn-success">Greet</button>
-      </form>
-
-    </div>
-  </transition>
 </div>           
     </div>
   </AppLayout>
@@ -103,7 +78,7 @@ export default {
       answerIsCorrect: '',
       correctAnswers: 0,
       incorrectAnswers: 0,
-            isLoading: true,
+      isLoading: true,
       name: '',
       selectedVoice: 0,
       synth: window.speechSynthesis,
@@ -140,6 +115,12 @@ export default {
         this.answerIsCorrect = false;
         this.incorrectAnswers++;
         this.lastWord = this.words[0]
+        this.sayWrongWord();
+        this.sayWrongWord();
+        this.sayWrongWord();
+        this.sayWrongWord();
+        this.sayWrongWord();
+
         setTimeout(() => {
         this.lastWord = []; 
         }, 2600);
@@ -174,13 +155,15 @@ export default {
     /**
      * Shout at the user
      */
-    greet () {
-      // it should be 'craic', but it doesn't sound right
-      this.greetingSpeech.text = `${this.name}`
+    sayWrongWord () {
+      this.greetingSpeech.text = this.lastWord.article + this.lastWord.german_word
 
-      this.greetingSpeech.voice = this.voiceList[this.selectedVoice]
+      this.greetingSpeech.voice = this.voiceList[9]
       
-      this.synth.speak(this.greetingSpeech)
+      setTimeout(() => {
+        this.synth.speak(this.greetingSpeech)
+      }, 1000);
+
     }
   }
 }
