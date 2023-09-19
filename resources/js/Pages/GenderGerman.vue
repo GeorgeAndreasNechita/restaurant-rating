@@ -25,13 +25,13 @@ import axios from 'axios';
       </div>
 
 
-      <div class="mt-4 text-green-700 text-2xl font-bold text-center">
+      <!-- <div class="mt-4 text-green-700 text-2xl font-bold text-center">
         Right: {{ this.correctAnswers }}    
         <span class="text-red-700 text-2xl font-bold text-center">
            Wrong: {{ this.incorrectAnswers }}
         </span>
-      </div>
-
+      </div> -->
+      <div class="mt-4 text-green-700 text-2xl font-bold text-center" >Points: {{ this.correctAnswers - this.incorrectAnswers }}</div>
       <div class="grid justify-center mt-2 font-bold text-2xl">
         <button @click="selectAnswer('Die')" class="answerButton text-orange-500">Die</button>
         <button @click="selectAnswer('Das')" class="answerButton text-violet-400">Das</button>
@@ -114,16 +114,14 @@ export default {
         this.words[0].correct -= 1
         this.answerIsCorrect = false;
         this.incorrectAnswers++;
-        this.lastWord = this.words[0]
-        this.sayWrongWord();
-        this.sayWrongWord();
-        this.sayWrongWord();
-        this.sayWrongWord();
-        this.sayWrongWord();
-
+        this.lastWord = this.words[0];
         setTimeout(() => {
-        this.lastWord = []; 
-        }, 2600);
+          for (let i = 0; i < 1; i++) {
+            this.sayWrongWord();
+          }
+          this.lastWord = []; 
+        }, 1100);
+
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
         .then(response => {
@@ -159,11 +157,8 @@ export default {
       this.greetingSpeech.text = this.lastWord.article + this.lastWord.german_word
 
       this.greetingSpeech.voice = this.voiceList[9]
+      this.synth.speak(this.greetingSpeech)
       
-      setTimeout(() => {
-        this.synth.speak(this.greetingSpeech)
-      }, 1000);
-
     }
   }
 }
