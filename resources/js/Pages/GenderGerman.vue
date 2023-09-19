@@ -14,7 +14,7 @@ import axios from 'axios';
 
 
 
-    <div v-if="words[0] && words[0].german_word" class="py-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false }" >
+    <div v-if="words[0] && words[0].german_word" class="mt-12 pb-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false }" >
       <div class="text-4xl font-bold text-center">
         {{ words[0].german_word }} -
         <span class="text-blue-700 text-3xl font-bold text-center mt-2">
