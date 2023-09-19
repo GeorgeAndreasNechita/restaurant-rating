@@ -13,10 +13,10 @@ import axios from 'axios';
     </template>
 
       <div class="mt-8 text-3xl font-bold text-center" :class="{ 'opacity-0': !lastWord.article }">
-      Last (wrong): {{ lastWord.article }} {{ lastWord.german_word }}
+      Correct Answer: {{ lastWord.article }} {{ lastWord.german_word }}
       </div>
 
-    <div v-if="words[0] && words[0].german_word" class="mt-3 pb-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false }" >
+    <div v-if="words[0] && words[0].german_word" class="mt-3 pb-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false, 'opacity-0': lastWord.article }" >
       <div class="text-4xl font-bold text-center">
         {{ words[0].german_word }} -
         <span class="text-blue-700 text-3xl font-bold text-center mt-2">
@@ -38,8 +38,6 @@ import axios from 'axios';
         <button @click="selectAnswer('Der')" class="answerButton text-stone-400" >Der</button>
       </div>
                     
-
-
     </div>
   </AppLayout>
 </template>
@@ -91,6 +89,9 @@ export default {
         this.answerIsCorrect = false;
         this.incorrectAnswers++;
         this.lastWord = this.words[0]
+        setTimeout(() => {
+        this.lastWord = []; 
+        }, 2600);
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
         .then(response => {
