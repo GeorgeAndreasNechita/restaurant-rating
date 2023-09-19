@@ -12,8 +12,9 @@ import axios from 'axios';
       </h2>
     </template>
 
-    <div v-if="words[0] && words[0].german_word">
-      <div class="text-green-700 text-4xl font-bold text-center mt-8">
+
+    <div v-if="words[0] && words[0].german_word" class="py-32"  :class="{ 'bg-green-400': isCorrect === true , 'bg-red-400': isCorrect === false }" >
+      <div class="text-green-700 text-4xl font-bold text-center">
         {{ words[0].german_word }} -
         <span class="text-blue-700 text-3xl font-bold text-center mt-2">
           {{ words[0].english_translation }}
@@ -21,7 +22,7 @@ import axios from 'axios';
       </div>
 
       <div class="grid grid-flow-col justify-stretch mt-8 font-bold text-2xl">
-        <button @click="selectAnswer('Der')" class="bg-blue-400 text-white px-4 py-2 rounded-lg mx-16">Der</button>
+        <button @click="selectAnswer('Der')" class="bg-blue-400 text-white px-4 py-2 rounded-lg mx-16" >Der</button>
         <button @click="selectAnswer('Die')" class="bg-blue-500 text-white px-4 py-2 rounded-lg mx-16">Die</button>
         <button @click="selectAnswer('Das')" class="bg-blue-600 text-white px-4 py-2 rounded-lg mx-16">Das</button>
       </div>
@@ -33,6 +34,10 @@ import axios from 'axios';
 export default {
   created() {
     this.fetchGermanWords();
+    
+  },
+  mounted(){
+
   },
   data() {
     return {
@@ -40,8 +45,8 @@ export default {
       isCorrect: ''
     }
   },
+  
   methods: {
-    
     fetchGermanWords() {
       axios.get('/german_words') // Replace with your API endpoint
         .then(response => {
@@ -55,6 +60,7 @@ export default {
       if (answer == this.words[0].article) {
         this.words[0].correct += 1;
         this.isCorrect = true;
+
       }
       else {
         this.words[0].correct -= 1
@@ -67,6 +73,10 @@ export default {
         .catch(error => {
           console.error('Error updating correct status:', error);
         });
+        setTimeout(() => {
+          this.isCorrect = '';
+          this.words.shift();
+        }, 2000);
     }
   }
 }
