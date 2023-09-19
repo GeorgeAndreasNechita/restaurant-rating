@@ -22,10 +22,10 @@ import axios from 'axios';
         </span>
       </div>
 
-      <div class="grid grid-flow-col justify-stretch mt-8 font-bold text-2xl">
-        <button @click="selectAnswer('Der')" class="bg-blue-400 text-white px-4 py-2 rounded-lg mx-16" >Der</button>
-        <button @click="selectAnswer('Die')" class="bg-blue-500 text-white px-4 py-2 rounded-lg mx-16">Die</button>
-        <button @click="selectAnswer('Das')" class="bg-blue-600 text-white px-4 py-2 rounded-lg mx-16">Das</button>
+      <div class="grid justify-center mt-8 font-bold text-2xl">
+        <button @click="selectAnswer('Der')" class="my-2 bg-blue-400 text-white px-32 py-4 rounded-lg mx-16" >Der</button>
+        <button @click="selectAnswer('Die')" class="my-2 bg-blue-500 text-white px-32 py-4 rounded-lg mx-16">Die</button>
+        <button @click="selectAnswer('Das')" class="my-2 bg-blue-600 text-white px-32 py-4 rounded-lg mx-16">Das</button>
       </div>
     </div>
   </AppLayout>
