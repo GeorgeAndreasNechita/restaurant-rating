@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\GermanWord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
@@ -27,5 +28,9 @@ Route::put('/restaurants/{restaurant}', [RestaurantController::class, 'update'])
 // Delete
 Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
 
+// get words
+Route::any('/german_words', function () {
+    return GermanWord::where('correct','<=', 10)->get()->shuffle();
+});
 // routes/api.php
 Route::post('/german-words/{id}', 'App\Http\Controllers\GermanWordController@updateCorrect');

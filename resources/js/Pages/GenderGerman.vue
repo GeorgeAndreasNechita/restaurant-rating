@@ -57,7 +57,7 @@ export default {
   
   methods: {
     fetchGermanWords() {
-      axios.get('/german_words') // Replace with your API endpoint
+      axios.get('/api/german_words') // Replace with your API endpoint
         .then(response => {
           this.words = response.data;
         })
@@ -66,14 +66,15 @@ export default {
         });
     },
     selectAnswer(answer) {
+      // If answered with the right article
       if (answer == this.words[0].article) {
         var mySound = new Audio('success.mp3')
         mySound.play()
         this.words[0].correct += 1;
         this.answerIsCorrect = true;
         this.correctAnswers++;
-
       }
+// If answered with the wrong article
       else {
         var mySound = new Audio('failure.mp3')
         mySound.play()
@@ -83,15 +84,16 @@ export default {
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
         .then(response => {
-          console.log(response.data.message);
         })
         .catch(error => {
-          console.error('Error updating correct status:', error);
         });
 
         setTimeout(() => {
           this.answerIsCorrect = '';
           this.words.shift();
+          if(this.words.length == 0){
+            this.fetchGermanWords();
+          }
         }, 500);
     }
   }
