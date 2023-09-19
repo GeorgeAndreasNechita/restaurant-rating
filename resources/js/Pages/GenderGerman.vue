@@ -94,7 +94,7 @@ export default {
           if(this.words.length == 0){
             this.fetchGermanWords();
           }
-        }, 500);
+        }, 350);
     }
   }
 }
