@@ -112,8 +112,8 @@ export default {
       }
 // If answered with the wrong article
       else {
-        var mySound = new Audio('failure.mp3')
-        mySound.play()
+        // var mySound = new Audio('failure.mp3')
+        // mySound.play()
         this.words[0].correct -= 1
         this.answerIsCorrect = false;
         this.incorrectAnswers++;
