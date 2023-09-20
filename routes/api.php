@@ -30,7 +30,10 @@ Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
 
 // get words
 Route::any('/german_words', function () {
-    return [GermanWord::where('correct','<=', 10)->get()->shuffle(), GermanWord::where('correct','<=', 10)->get()->count()];
+    return [GermanWord::where('correctAnswersCount','<=', 10)->get()->shuffle(), GermanWord::where('correctAnswersCount','<=', 10)->get()->count()];
+});
+Route::any('/german_words_only', function () {
+    return GermanWord::select('german_word')->get()->pluck('german_word')->shuffle();
 });
 // routes/api.php
 Route::post('/german-words/{id}', 'App\Http\Controllers\GermanWordController@updateCorrect');
