@@ -13,15 +13,16 @@ import axios from 'axios';
       </h2>
     </template>
 
-      <add-new-word class="mt-8" ></add-new-word>
+      <!-- <add-new-word class="mt-8" ></add-new-word> -->
       <div class="mt-8 text-3xl font-bold text-center" :class="{ 'opacity-0': !lastWord.article }">
       Correct Answer: {{ lastWord.article }} {{ lastWord.german_word }}
       </div>
 
     <div v-if="words[0] && words[0].german_word" class="mt-3 pb-32"  :class="{ 'bg-green-400': answerIsCorrect === true , 'bg-red-400': answerIsCorrect === false, 'opacity-0': lastWord.article }" >
-      <div class="text-4xl font-bold text-center">
-        {{ words[0].german_word }} -
-        <span class="text-blue-700 text-3xl font-bold text-center mt-2">
+      <div class="text-center" >
+        <span class="GERMAN-WORD text-4xl font-bold">{{ words[0].german_word }} | </span>
+        <span class="GERMAND-WORD-PLURAL text-gray-600 text-4xl font-bold">{{ words[0].german_word_plural }} | </span>
+        <span class="ENGLISH-TRANSLATION text-blue-700 text-3xl font-bold mt-2">
           {{ words[0].english_translation }}
         </span>
       </div>
@@ -125,7 +126,7 @@ export default {
             this.sayWrongWord();
           }
           this.lastWord = []; 
-        }, 1100);
+        }, 1000);
 
       }
       axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
