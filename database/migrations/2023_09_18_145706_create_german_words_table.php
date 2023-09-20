@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('german_words', function (Blueprint $table) {
             $table->id();
-            $table->string('german_word')->unique();
             $table->string('article'); // Der, Die, Das, Den, etc.
+            $table->string('german_word')->unique();
+            $table->string('german_word_plural')->nulable();
             $table->string('english_translation');
-            $table->tinyInteger('correct')->default(0);
+            $table->tinyInteger('correctAnswersCount')->default(0);
             $table->timestamps();
         });
     }
