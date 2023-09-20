@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
+import AddNewWord from '@/CustomComponents/AddNewWord.vue';
 import axios from 'axios';
 </script>
 
@@ -12,6 +13,7 @@ import axios from 'axios';
       </h2>
     </template>
 
+      <add-new-word class="mt-8" ></add-new-word>
       <div class="mt-8 text-3xl font-bold text-center" :class="{ 'opacity-0': !lastWord.article }">
       Correct Answer: {{ lastWord.article }} {{ lastWord.german_word }}
       </div>
