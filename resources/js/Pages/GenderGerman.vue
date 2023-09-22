@@ -77,7 +77,6 @@ export default {
       correctAnswers: 0,
       incorrectAnswers: 0,
       isLoading: true,
-      name: '',
       selectedVoice: 0,
       synth: window.speechSynthesis,
       voiceList: [],
