@@ -77,7 +77,6 @@ export default {
       correctAnswers: 0,
       incorrectAnswers: 0,
       isLoading: true,
-      selectedVoice: 0,
       synth: window.speechSynthesis,
       voiceList: [],
       greetingSpeech: new window.SpeechSynthesisUtterance(),
