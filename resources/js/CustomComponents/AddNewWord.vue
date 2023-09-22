@@ -4,7 +4,7 @@ import axios from 'axios';
 
 <template>
   <div class="grid justify-center" >
-    hello
+    <!-- hello -->
   </div>
 </template>
 
