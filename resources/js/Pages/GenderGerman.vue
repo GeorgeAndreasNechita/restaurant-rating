@@ -113,7 +113,8 @@ export default {
         this.lastWord = this.words[0];
         setTimeout(() => {
           for (let i = 0; i < 1; i++) {
-            this.sayLoud();
+            let phrase = this.lastWord.article + this.lastWord.german_word
+            this.sayLoud(phrase);
           }
           this.lastWord = []; 
         }, 1000);
@@ -149,8 +150,8 @@ export default {
     /**
      * Shout at the user
      */
-    sayLoud () {
-      this.greetingSpeech.text = this.lastWord.article + this.lastWord.german_word
+    sayLoud(phrase) {
+      this.greetingSpeech.text = phrase
       this.greetingSpeech.voice = this.voiceList[9]
       this.synth.speak(this.greetingSpeech)
       
