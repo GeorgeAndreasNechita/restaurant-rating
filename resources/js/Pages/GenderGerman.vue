@@ -37,9 +37,9 @@ import axios from 'axios';
       <div class="mt-4 text-green-700 text-2xl font-bold text-center" >Points: {{ this.correctAnswers - this.incorrectAnswers }} &nbsp;&nbsp;&nbsp; <span class="text-center text-black" >Words left: {{ wordsCountInDatabase }}</span></div>
       
       <div class="grid justify-center mt-2 font-bold text-2xl">
-        <button @click="selectAnswer('Die')" class="answerButton text-orange-500">Die</button>
-        <button @click="selectAnswer('Das')" class="answerButton text-violet-400">Das</button>
-        <button @click="selectAnswer('Der')" class="answerButton text-stone-400" >Der</button>
+        <button @click="selectAnswer('die')" class="answerButton text-orange-500">Die</button>
+        <button @click="selectAnswer('das')" class="answerButton text-violet-400">Das</button>
+        <button @click="selectAnswer('der')" class="answerButton text-stone-400" >Der</button>
       </div>
 <div>
 
@@ -108,16 +108,14 @@ export default {
       if (answer == this.words[0].article) {
         var mySound = new Audio('success.mp3')
         mySound.play()
-        this.words[0].correct += 1;
+        this.words[0].correctAnswersCount += 1;
         this.answerIsCorrect = true;
         this.correctAnswers++;
         this.lastWord = [];
       }
 // If answered with the wrong article
       else {
-        // var mySound = new Audio('failure.mp3')
-        // mySound.play()
-        this.words[0].correct -= 1
+        this.words[0].correctAnswersCount -= 1
         this.answerIsCorrect = false;
         this.incorrectAnswers++;
         this.lastWord = this.words[0];
@@ -129,7 +127,7 @@ export default {
         }, 1000);
 
       }
-      axios.post(`/api/german-words/${this.words[0].id}`, { correct: this.words[0].correct })
+      axios.post(`/api/german-words/${this.words[0].id}`, { correctAnswersCount: this.words[0].correctAnswersCount })
         .then(response => {
         })
         .catch(error => {
