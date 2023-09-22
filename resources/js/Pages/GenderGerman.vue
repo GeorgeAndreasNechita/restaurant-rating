@@ -7,12 +7,6 @@ import axios from 'axios';
 
 <template>
   <AppLayout title="Dashboard">
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Dashboard
-      </h2>
-    </template>
-
       <!-- <add-new-word class="mt-8" ></add-new-word> -->
       <div class="mt-8 text-3xl font-bold text-center" :class="{ 'opacity-0': !lastWord.article }">
       Correct Answer: {{ lastWord.article }} {{ lastWord.german_word }}
