@@ -79,7 +79,7 @@ export default {
       isLoading: true,
       synth: window.speechSynthesis,
       voiceList: [],
-      greetingSpeech: new window.SpeechSynthesisUtterance(),
+      sayLoudObject: new window.SpeechSynthesisUtterance(),
       wordsCountInDatabase: ''
     }
   },
@@ -138,11 +138,11 @@ export default {
      * React to speech events
      */
     listenForSpeechEvents () {
-      this.greetingSpeech.onstart = () => {
+      this.sayLoudObject.onstart = () => {
         this.isLoading = true
       }
 
-      this.greetingSpeech.onend = () => {
+      this.sayLoudObject.onend = () => {
         this.isLoading = false
       }
     },
@@ -151,9 +151,9 @@ export default {
      * Shout at the user
      */
     sayLoud(phrase) {
-      this.greetingSpeech.text = phrase
-      this.greetingSpeech.voice = this.voiceList[9]
-      this.synth.speak(this.greetingSpeech)
+      this.sayLoudObject.text = phrase
+      this.sayLoudObject.voice = this.voiceList[9]
+      this.synth.speak(this.sayLoudObject)
       
     }
   }
