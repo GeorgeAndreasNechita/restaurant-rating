@@ -11,7 +11,7 @@ class GermanWordController extends Controller
 public function updateCorrect(Request $request, $id)
 {
     $germanWord = GermanWord::findOrFail($id);
-    $germanWord->update(['correct' => $request->correct]);
+    $germanWord->update(['correctAnswersCount' => $request->correctAnswersCount]);
 
     return response()->json(['message' => 'Correct status updated successfully']);
 }
